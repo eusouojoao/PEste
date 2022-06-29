@@ -1,0 +1,57 @@
+\lstset{style=single3}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-1
+\begin{lstlisting}[caption=Pergunta 6, frame=tlrb]{pergunta6}
+pacman::p_load(pacman, rio, cowplot, tidyverse, datasets, ggplot2, dplyr, 
+               data.table, hrbrthemes) # Load req. packages
+options(digits=15)
+amostras=1940
+a=9; b=13
+E=(a+b)/2 # Valor teórico para o valor esperado
+V=((b-a)^2)/12 # Valor teórico para a variância
+## Simulação -------------------------------------------------------------------
+sim <- function(n){
+  set.seed(731)
+  Vn=V/n
+  data=rep(0, amostras)
+  data_avg=data.frame(rep(0, amostras))
+  avg=rep(0, amostras)
+  for(i in 1:amostras){
+    data[i] = data.frame(X=runif(n, a, b))
+    avg[i] = mean(data[[i]])
+  }
+  data_avg <- data.frame(avg)
+  # Plot do gráfico
+  plot <- ggplot(data_avg, aes(x = avg)) + 
+    geom_histogram(aes(y = ..density..), colour = 1, fill = "white", bins=20) +
+    labs(x="Média da amostra", y="Densidade") + 
+    stat_function(fun = dnorm, args = list(mean = E, sd = sqrt(Vn))) +
+    theme(plot.title=element_text(hjust=0.5, size=32, face="bold"), 
+          axis.title=element_text(size=24),
+          axis.text=element_text(size=16)) + ggtitle(paste0("n = ", n))
+  return(plot)
+}
+## Histogramas sobrepostos com as curvas com a distribuição normal -------------
+plot_grid(sim(2), sim(21), sim(95), nrow=3, ncol=1)
+\end{lstlisting}
+%-2
+%\iffalse
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.6\linewidth]{imag/6.png}
+    %\caption{}
+    \label{fig:pergunta6}
+\end{figure}
+%\fi
+%-3
+\paragraph{Parâmetros:} Seed: 731; Número de amostras: 1940; Uniforme no intervalo: $[9, 13]$
+\paragraph{Comentário:}
+Com base nas múltiplas simulações, onde foi calculada a média de uma distribuição uniforme (para três valores da dimensão de amostras), foi elaborado o histograma de densidades relativas apresentado, ao qual foi sobreposto uma curva com distribuição normal.
+
+Visto que as variáveis aleatórias são independentes e identicamente distribuídas, estamos perante uma aplicação possível do Teorema do Limite Central, e deste modo é aceitável aproximar a distribuição uniforme a uma normal de valor esperado $E(\mathbb{X}) = \mu$ e variância $V_n(\mathbb{X}) = \sigma^2/n$. Salienta-se a aproximação vai melhorando com o aumento da dimensão das amostras, no entanto prova-se aceitável para os valores baixos requisitados (inferiores a 30). 
+
+Ao aumentar a dimensão de amostras é aparente a tendência de um estreitamento e maior semelhança com a curva com distribuição normal. Este comportamento é necessariamente esperado, visto que ocorre uma menor dispersão da média à medida que a dimensão de amostras aumenta - a variância é inversamente proporcional a este valor: $V_n(\mathbb{X}) = \sigma^2/n$.
+
+Então para amostras de maiores dimensões, a média das amostras da distribuição uniforme, aproxima-se, de facto, a uma distribuição normal centrada no valor esperado de cada amostra e com variância que diminui com o aumento da dimensão das amostras.
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%

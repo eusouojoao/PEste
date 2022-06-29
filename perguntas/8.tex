@@ -1,0 +1,37 @@
+\lstset{style=single1}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-1
+\begin{lstlisting}[caption=Pergunta 8, frame=tlrb]{pergunta8}
+set.seed(172)
+amostras=850
+n=1060
+lambda=0.67
+options(digits=15)
+## Calcular extremo da normal de lambda aproximada -----------------------------
+gama=0.98
+a=qnorm((1+gama)/2)
+q=(1-gama)/2
+a_tabela= 2.3263 #tabela utilizando o valor de q
+mle <- rep(0,amostras)
+avec <- rep(0,amostras)
+for (i in 1:amostras){
+  data <- rexp(n, lambda)
+  mle[i] <- mean(data) # Valor esperado
+  avec[i] <- (2*a)/(mle[i]*sqrt(n))
+}
+## Calcular amplitude ----------------------------------------------------------
+amplitude = mean(avec); print(amplitude)
+\end{lstlisting}
+%-2
+\iffalse
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.85\linewidth]{imag/8.png}
+    %\caption{}
+    \label{fig:pergunta8}
+\end{figure}
+\fi
+%-3
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%

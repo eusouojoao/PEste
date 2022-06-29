@@ -1,0 +1,34 @@
+\lstset{style=single1}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-1
+\begin{lstlisting}[caption=Pergunta 5, frame=tlrb]{pergunta5}
+options(digits=15)
+set.seed(1885)
+n=502
+lambda=0.18
+## Valor teórico ---------------------------------------------------------------
+teorico=0.735947819 # Integral de 3 a +inf de 0.15e^(-0.15x)
+## Valor estimado --------------------------------------------------------------
+t=0
+data <- data.frame(X=rexp(n, lambda))
+for(i in 1:n) {
+    if(data$X[i]>4)
+      t=t+1 # Valores superiores a 4
+}
+# Valor estimado
+estimado=t/n
+# Modulo da diferença entre os valores
+result = abs(teorico - estimado); print(result)
+\end{lstlisting}
+%-2
+\iffalse
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.85\linewidth]{imag/5.png}
+    %\caption{}
+    \label{fig:pergunta5}
+\end{figure}
+\fi
+%-3
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%

@@ -1,0 +1,170 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=30mm,top=15mm,right=30mm,bottom=30mm]{geometry}
+\usepackage{etoolbox} %required for cover page
+\usepackage{booktabs}
+\usepackage[usestackEOL]{stackengine}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage[table]{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\usepackage{enumitem,kantlipsum}
+\usepackage{amssymb}
+\usepackage[square,numbers,sort]{natbib}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{listingsutf8}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage[most]{tcolorbox}
+\usepackage{inconsolata}
+\usepackage{lipsum}
+\usepackage[export]{adjustbox}
+\usepackage{fancyhdr}
+\usepackage{makecell}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usemintedstyle{emacs}
+\renewcommand{\figurename}{Fig.}
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+%__----|----\_o_/----|----__----|----\[T]/----|----__----|----\_o_/----|----__
+%__----|----=_e_>----|----__----Praise the sun!----__----|----<_e_=----|----__
+%__----|----/_o_\----|----__----|----\[T]/----|----__----|----/_o_\----|----__
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{black}{\parbox{\textwidth}{#3}}}
+\captionsetup[lstlisting]{format=listing, labelfont=white, textfont=white}
+
+\lstdefinestyle{single1}{% setup listings
+	language=R,% set programming language
+	inputencoding=utf8/latin1,
+    basicstyle=\scriptsize\ttfamily,
+	keywordstyle=\color{blue},% keyword style
+    commentstyle=\color{gray},% comment style
+	numbers=left,% display line numbers on the left side
+	numberstyle=\tiny,% use small line numbers
+	numbersep=8pt,% space between line numbers and code
+	tabsize=2,% sizes of tabs
+	showstringspaces=false,% do not replace spaces in strings by a certain character
+	captionpos=t,% positioning of the caption above
+    breaklines=true,% automatic line breaking
+    escapeinside={(*}{*)},% escaping to LaTeX
+    fancyvrb=true,% verbatim code is typset by listings
+    extendedchars=true,% prohibit extended chars (chars of codes 128--255)
+    literate={"}{{\texttt{"}}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c{c}}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {à}{{\`a}}1 {À}{{\`A}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'A}}1 {~}{{$\bm\sim$}}1 {<=}{{$\bm\le$}}1{>=}{{$\bm\ge$}}1{!=}{{$\bm\neq$}}1 {^}{{$^{\bm\wedge}$}}1 {ê}{{\^e}}1 {µ}{{$\mu$}}1,% item to replace, text, length of chars
+    alsoletter={.<-},% becomes a letter
+    alsoother={$},% becomes other
+    otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+    deletekeywords={de, R}% remove keywords
+}
+
+\lstdefinestyle{single2}{% setup listings
+	language=R,% set programming language
+	inputencoding=utf8/latin1,
+    basicstyle=\tiny\ttfamily,
+	keywordstyle=\color{blue},% keyword style
+    commentstyle=\color{gray},% comment style
+	numbers=left,% display line numbers on the left side
+	numberstyle=\tiny,% use small line numbers
+	numbersep=8pt,% space between line numbers and code
+	tabsize=2,% sizes of tabs
+	showstringspaces=false,% do not replace spaces in strings by a certain character
+	captionpos=t,% positioning of the caption above
+    breaklines=true,% automatic line breaking
+    escapeinside={(*}{*)},% escaping to LaTeX
+    fancyvrb=true,% verbatim code is typset by listings
+    extendedchars=true,% prohibit extended chars (chars of codes 128--255)
+    literate={"}{{\texttt{"}}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c{c}}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {à}{{\`a}}1 {À}{{\`A}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'A}}1 {~}{{$\bm\sim$}}1 {<=}{{$\bm\le$}}1{>=}{{$\bm\ge$}}1{!=}{{$\bm\neq$}}1 {^}{{$^{\bm\wedge}$}}1 ,% item to replace, text, length of chars
+    alsoletter={.<-},% becomes a letter
+    alsoother={$},% becomes other
+    otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+    deletekeywords={de, R}% remove keywords
+}
+
+\lstdefinestyle{single3}{% setup listings
+	language=R,% set programming language
+	inputencoding=utf8/latin1,
+    basicstyle=\fontsize{6pt}{6pt}\ttfamily,
+	keywordstyle=\color{blue},% keyword style
+    commentstyle=\color{gray},% comment style
+	numbers=left,% display line numbers on the left side
+	numberstyle=\fontsize{6pt}{6pt},% use small line numbers
+	numbersep=8pt,% space between line numbers and code
+	tabsize=2,% sizes of tabs
+	showstringspaces=false,% do not replace spaces in strings by a certain character
+	captionpos=t,% positioning of the caption above
+    breaklines=true,% automatic line breaking
+    escapeinside={(*}{*)},% escaping to LaTeX
+    fancyvrb=true,% verbatim code is typset by listings
+    extendedchars=true,% prohibit extended chars (chars of codes 128--255)
+    literate={"}{{\texttt{"}}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c{c}}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {à}{{\`a}}1 {À}{{\`A}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'A}}1 {~}{{$\bm\sim$}}1 {<=}{{$\bm\le$}}1{>=}{{$\bm\ge$}}1{!=}{{$\bm\neq$}}1 {^}{{$^{\bm\wedge}$}}1 ,% item to replace, text, length of chars
+    alsoletter={.<-},% becomes a letter
+    alsoother={$},% becomes other
+    otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+    deletekeywords={de, R}% remove keywords
+}
+
+\lstdefinestyle{double10}{% setup listings
+	language=R,% set programming language
+	inputencoding=latin1,
+    basicstyle=\fontsize{7pt}{7pt}\ttfamily,
+	keywordstyle=\color{blue},% keyword style
+    commentstyle=\color{gray},% comment style
+	numbers=left,% display line numbers on the left side
+	numberstyle=\fontsize{7pt}{0pt},% use small line numbers
+	numbersep=10pt,% space between line numbers and code
+	tabsize=2,% sizes of tabs
+	showstringspaces=false,% do not replace spaces in strings by a certain character
+	captionpos=t,% positioning of the caption above
+    breaklines=true,% automatic line breaking
+    escapeinside={(*}{*)},% escaping to LaTeX
+    fancyvrb=true,% verbatim code is typset by listings
+    extendedchars=true,% prohibit extended chars (chars of codes 128--255)
+    literate={"}{{\texttt{"}}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c{c}}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {à}{{\`a}}1 {À}{{\`A}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'A}}1 {~}{{$\bm\sim$}}1 {<=}{{$\bm\le$}}1{>=}{{$\bm\ge$}}1{!=}{{$\bm\neq$}}1 {^}{{$^{\bm\wedge}$}}1 ,% item to replace, text, length of chars
+    alsoletter={.<-},% becomes a letter
+    alsoother={$},% becomes other
+    otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+    deletekeywords={de, R}% remove keywords
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%->
+\setlength{\headheight}{58.0pt}
+\pagestyle{fancy}
+\fancyhf{}% Clear all headers/footers
+\renewcommand{\headrulewidth}{.4pt}% Header rule width
+\renewcommand{\footrulewidth}{0pt}% No footer rule
+\fancyhead[L]{% Left header
+    \rule[-1.75\baselineskip]{0pt}{0pt}% Strut to ensure a 1/4 \baselineskip between image and header rule
+    \centering\makecell[cl]{{\footnotesize \textit{Probabilidade e Estatística}} \\ \scriptsize ~\textsc{\textbf{João Gonçalves : 99995}}}
+    \hfill
+    \includegraphics[height=4\baselineskip,valign=c]{IST.pdf}% Image 
+}
+\setlength{\headheight}{3.5\baselineskip}% To accommodate new oversized header
+%<-
+%% Apenas comentar (para que sobre um input unico) e descarregar o pdf com o input necessário (:
+\pagenumbering{arabic}% Arabic page numbers (and reset to 1)
+    %\input{perguntas/1}
+    %\input{perguntas/2}
+    %\input{perguntas/3}
+    %\input{perguntas/4}
+    %\input{perguntas/5}
+    %\input{perguntas/6}
+    %\input{perguntas/7}
+    %\input{perguntas/8}
+    %\input{perguntas/9}
+    \input{perguntas/10}
+    %\bibliographystyle{unsrt}
+    %\bibliography{teste.bib}
+\end{document}
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%

@@ -1,0 +1,50 @@
+\lstset{style=single1}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-1
+\begin{lstlisting}[caption=Pergunta 4, frame=tlrb]{pergunta4}
+pacman::p_load(pacman, rio, tidyverse, ggplot2, hrbrthemes) # Load req. packages
+## Dados -----------------------------------------------------------------------
+utentes <- import("~/Projects/git/personal/PEst/Code_env/Utentes.xlsx")
+result <- utentes[, c(3,4)]
+# Covariância e coeficiente de correlação linear
+IMC=result$IMC
+TAD=result$TAD
+cov=cov(IMC, TAD); sprintf("Covariância: %.2f", cov)
+corr=cor(IMC, TAD); sprintf("Coeficiente de correlação linear: %.2f", corr)
+## Gráfico de dispersão --------------------------------------------------------
+ggplot(result, aes(x=IMC, y=TAD)) +
+  geom_point(size=2, shape=23, color = 'royalblue3') +
+  ggtitle("Gráfico de dispersão entre o TAD e IMC")  +
+  theme(plot.title=element_text(hjust=0.5, size=32, face="bold"), 
+        axis.title=element_text(size=24),
+        axis.text=element_text(size=16))+
+  geom_smooth(method=lm, color = 'darkblue')
+\end{lstlisting}
+%-2
+%\iffalse
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.85\linewidth]{imag/4.png}
+    %\caption{}
+    \label{fig:pergunta4}
+\end{figure}
+%\fi
+%-3
+\paragraph{Comentário:}
+Note-se que apesar da aproximação linear, há uma fraca correlação entre o IMC e o TAD, tal pode ser observado gráficamente através dos diversos pontos dos dados recolhidos que não seguem este padrão. É então possível concluir que apesar de se associar\footnotemark que um aumento do IMC leva a um aumento do TAD, os diversos pontos dispersos, provenientes dos dados recolhidos, suscitam uma relação que não é perfeitamente linear - sendo este o motivo pelo qual foi considerado que a correlação entre as duas variáveis é fraca/não ideal, por análise gráfica. A associação positiva entre os dados é amplamente estudada\footnotemark[1], e portanto, esperada.
+\begin{table}[h!]
+\centering
+    \begin{tabular}{||c | c||} 
+    \hline
+    \textbf{Covariância} [$s_{xy}$] & \textbf{Coeficiente de correlação linear} [$r_{xy}$] \\ 
+    \hline\hline
+    24.94 & 0.57 \\ 
+    \hline
+    \end{tabular}
+\end{table}
+
+Assim, analizando a covariância e do coeficiente de correlação linear, é facilmente corroborado o visualizado, e expectável entre o binómio de conjuntos de dados. Visto que $s_{xy} > 0$, é natural a associação positiva observada (e documentada\footnotemark[1]); no entanto, verifica-se $r_{xy} \approx 0.57$, que ainda se encontra longe do valor ideal unitário.
+
+\footnotetext{Dua S, Bhuker M, Sharma P, Dhall M, Kapoor S. Body mass index relates to blood pressure among adults. N Am J Med Sci. 2014 Feb;6(2):89-95. doi: 10.4103/1947-2714.127751. PMID: 24696830; PMCID: PMC3968571.}
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%

@@ -1,0 +1,42 @@
+\lstset{style=single1}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-1
+\begin{lstlisting}[caption=Pergunta 3, frame=tlrb]{pergunta3}
+pacman::p_load(pacman, rio, tidyverse, ggplot2, hrbrthemes) # Load req. packages
+## Dados -----------------------------------------------------------------------
+qualidade_ar <- import("~/Projects/git/personal/PEst/Code_env/QualidadeARO3.xlsx")
+result <- qualidade_ar[, c(2,10)]
+result$Entrecampos <- as.numeric(qualidade_ar$Entrecampos)
+result$`VNTelha-Maia` <- as.numeric(qualidade_ar$`VNTelha-Maia`)
+dataframe <- gather(result, "VNTelha-Maia", "Entrecampos",1:2)
+## Histograma ------------------------------------------------------------------
+ggplot(dataframe, aes(x = `Entrecampos`, fill = `VNTelha-Maia`)) +                    
+  geom_histogram(position = "identity", alpha = 0.2, bins = 50) +
+  labs(fill="Estações", x="Niveis de ozono (µg/m3)", y="Ocorrências") +
+  ggtitle("Qualidade do ar em diferentes estações da QUALAR") +
+  theme(plot.title = element_text(hjust = 0.5, size=32, face="bold"), 
+        axis.title=element_text(size=24),
+        axis.text=element_text(size=16),
+        legend.title=element_text(size=24),
+        legend.text=element_text(size=16))
+        
+## Valor médio da qualidade do ar nas estações ---------------------------------
+E_avg = mean(result$Entrecampos); print(E_avg)
+V_avg = mean(result$`VNTelha-Maia`); print(V_avg)
+\end{lstlisting}
+%-2
+%\iffalse
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.85\linewidth]{imag/3.png}
+    %\caption{}
+    \label{fig:pergunta3}
+\end{figure}
+%\fi
+%-3
+\paragraph{Comentário:}
+A partir do histograma formulado através das observações horárias de níveis de ozono em microgramas por metro cúbico em duas estações específicas - Entrecampos e VNTelha-Maia - no ano de 2020, é possível obter a conclusão de que a estação VNTelha-Maia teve mais horas com níveis baixos de ozono (0 a 50 $\mu$g/m$^3)$ em comparação à estação Entrecampos. No entanto, para níveis intermédios de ozono (50 a 100 $\mu$g/m$^3)$, suscita-se o contrário, i.e., a estação Entrecampos tem um nível predominante de ocorrências. A níveis elevados de ozono (100 a 200 $\mu$g/m$^3)$, ambas as estações apresentam um número de ocorrências bastante diminuto.
+
+Com o observado, seria de esperar que a estação Entrecampos fosse a mais poluída. Tal é corroborado, ao analizar os níveis de poluição médias das duas estações ao longo do ano, visto que Entrecampos apresenta um valor de 52.7 $\mu$g/m$^3$ e VNTelha-Maia um valor de 50.9 $\mu$g/m$^3$.
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
